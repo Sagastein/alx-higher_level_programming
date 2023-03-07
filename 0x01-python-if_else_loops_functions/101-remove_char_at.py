@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-#sagacode 
 def remove_char_at(str, n):
     i = 0
     new_str = ""
