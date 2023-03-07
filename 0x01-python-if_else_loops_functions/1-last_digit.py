@@ -2,10 +2,18 @@
 import random
 number = random.randint(-10000, 10000)
 # YOUR CODE HERE Sagacode
-lastdigit = int(str(number)[-1])
-if lastdigit > 5:
-    print("Last digit of "+ str(number) +" is "+ str(lastdigit) +" and is greater than 5")
-elif lastdigit == 0:
-    print("Last digit of "+ str(number) +" is "+ str(lastdigit) +" and is 0")
+lastDigit = 0
+
+if number >= 0:
+    lastDigit = number % 10
 else:
-    print("Last digit of "+ str(number) +" is -"+ str(lastdigit) +" and is less than 6 and not 0")
+    lastDigit = (-number % 10) * -1
+
+message = f"Last digit of {number} is {lastDigit}"
+
+if lastDigit == 0:
+    print(f"{message} and is 0")
+elif lastDigit > 5 and lastDigit % 10 != 0:
+    print(f"{message} and is greater than 5")
+else:
+    print(f"{message} and is less than 6 and not 0")
