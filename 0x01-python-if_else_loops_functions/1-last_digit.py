@@ -2,9 +2,9 @@
 import random
 number = random.randint(-10000, 10000)
 # YOUR CODE HERE Sagacode
-print(number)
+)
 lastdigit = int(str(number)[-1])
-print(lastdigit)
+
 if lastdigit > 5:
     print("Last digit of "+ str(number) +" is "+ str(lastdigit) +" and is greater than 5")
 elif lastdigit == 0:
