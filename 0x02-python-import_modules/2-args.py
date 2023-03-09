@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-#sagacode
+
 if __name__ == "__main__":
     """Print the number of and list of arguments."""
     import sys
