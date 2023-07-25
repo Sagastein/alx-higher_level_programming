@@ -1,37 +1,26 @@
 #!/usr/bin/node
 
+// Import the 'request' module
 const request = require('request');
 
-function countCompletedTasks(apiUrl) {
-  request(apiUrl, (error, response, body) => {
-    if (error) {
-      console.error('Error:', error);
-    } else if (response.statusCode !== 200) {
-      console.error('Status:', response.statusCode);
-    } else {
-      const todos = JSON.parse(body);
-      const completedTasksByUserId = {};
+// Use the 'request' module to perform an HTTP GET request to the URL
+request(process.argv[2], function (error, response, body) {
+  // Check if there was no error during the HTTP request.
+  if (!error) {
+    // parse the JSON data using 'JSON.parse()'
+    const todos = JSON.parse(body);
 
-      todos.forEach((todo) => {
-        if (todo.completed) {
-          if (completedTasksByUserId[todo.userId]) {
-            completedTasksByUserId[todo.userId]++;
-          } else {
-            completedTasksByUserId[todo.userId] = 1;
-          }
-        }
-      });
+    // Create an empty object 'completed' to store the count of completed todos for each user ID.
+    const completed = {};
 
-      console.log(completedTasksByUserId);
-    }
-  });
-}
-
-const apiUrl = process.argv[2];
-
-if (!apiUrl) {
-  console.error('Usage: ./6-completed_tasks.js <API_URL>');
-  process.exit(1);
-}
-
-countCompletedTasks(apiUrl);
+    // Iterate through each todo in the 'todos' array.
+    todos.forEach((todo) => {
+      if (todo.completed && completed[todo.userId] === undefined) {
+        completed[todo.userId] = 1;
+      } else if (todo.completed) {
+        completed[todo.userId] += 1;
+      }
+    });
+    console.log(completed);
+  }
+});
